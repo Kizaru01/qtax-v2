@@ -1,20 +1,10 @@
 jQuery("#dt_serving").on("draw.dt", function (event, settings) {
   const records = new jQuery.fn.dataTable.Api(settings).rows().data().toArray();
   const grid = document.getElementById("qtax-serving-grid");
-  const columns = records.length > 4 ? 2 : 1;
-  const rows = Math.max(1, Math.ceil(records.length / columns));
+  const rows = Math.max(3, Math.ceil(records.length / 2));
 
-  grid.style.setProperty("--ns-cols", columns);
   grid.style.setProperty("--ns-rows", rows);
-  grid.classList.toggle("ns-grid-dense", records.length > 6);
-
-  if (!records.length) {
-    const empty = document.createElement("div");
-    empty.className = "ns-empty";
-    empty.textContent = "Waiting for next customer…";
-    grid.replaceChildren(empty);
-    return;
-  }
+  grid.classList.toggle("ns-grid-dense", rows > 3);
 
   const template = document.getElementById("qtax-serving-card");
   const cards = document.createDocumentFragment();

@@ -40,21 +40,25 @@
                     <path d="m26 12 13 15" />
                     <circle cx="24" cy="24" r="1.4" />
                 </svg>
-                <h1>Choose Your Service</h1>
-                <p>Select a service, then choose your lane.</p>
+                <h1>Choose Your Lane</h1>
+                <p>Tap an option to get your queue ticket.</p>
             </div>
 
             <div class="kiosk-lanes">
-                <button class="kiosk-lane kiosk-lane-regular" type="button"
-                    data-bs-toggle="modal" data-bs-target="#modal-1-4app">
-                    <img src="<?php echo base_url('build/images/search.png?v='.VERSION); ?>" alt="">
-                    <span class="kiosk-lane-label"><strong>Assessment</strong></span>
+                <button id="btn-regular" class="kiosk-lane kiosk-lane-regular" type="button">
+                    <img src="<?php echo base_url('vendors/bootstrap-5/female-and-male-shapes-silhouettes.png?v='.VERSION); ?>"
+                        alt="">
+                    <span class="kiosk-lane-label">
+                        <strong>Regular</strong>
+                    </span>
                     <span class="kiosk-lane-arrow" aria-hidden="true"></span>
                 </button>
-                <button class="kiosk-lane kiosk-lane-regular" type="button"
-                    data-bs-toggle="modal" data-bs-target="#modal-5-10app">
-                    <img src="<?php echo base_url('build/images/bill.png?v='.VERSION); ?>" alt="">
-                    <span class="kiosk-lane-label"><strong>Payment</strong></span>
+                <button id="btn-special" class="kiosk-lane kiosk-lane-special" type="button">
+                    <img src="<?php echo base_url('vendors/bootstrap-5/special-icon.png?v='.VERSION); ?>" alt="">
+                    <span class="kiosk-lane-label">
+                        <strong>Special</strong>
+                        <span>PWDs • Senior Citizens • Pregnant Women</span>
+                    </span>
                     <span class="kiosk-lane-arrow" aria-hidden="true"></span>
                 </button>
             </div>
@@ -64,184 +68,6 @@
             <span>Developed &amp; Maintained by City Information and Communications Technology Office</span>
         </footer>
     </div>
-
-    <div class="modal" id="modal-taxbill" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modal-taxbill"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-md">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="">Tax BIll / PWDs, Senior, Pregnant</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-                        style="min-width: 35px;"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-sm content-regular">
-                            <div id="btn-regular-tax" class="bg-primary btn-modal" data-bs-dismiss="modal"
-                                aria-label="Close">
-                                <img src="<?php echo base_url('vendors/bootstrap-5/female-and-male-shapes-silhouettes.png?v='.VERSION); ?>"
-                                    class="card-img-top" alt="">
-                                <p>Tax BIll</p>
-                            </div>
-                        </div>
-                        <div class="col-sm content-special">
-                            <div id="btn-special-tax" class="bg-danger btn-modal" data-bs-dismiss="modal"
-                                aria-label="Close">
-                                <img src="<?php echo base_url('vendors/bootstrap-5/special-icon.png?v='.VERSION); ?>"
-                                    class="card-img-top" alt="">
-                                <p><span>(PWDs, Senior, Pregnant)</span><br>Special lane
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <?php foreach ([
-        ['modal-1-4app', 'Assessment', 'btn-regular', 'btn-special'],
-        ['modal-5-10app', 'Payment Only', 'btn-regular1', 'btn-special1'],
-    ] as [$modalId, $serviceLabel, $regularId, $specialId]): ?>
-        <div class="modal kiosk-lane-modal" id="<?php echo $modalId; ?>" data-bs-keyboard="false"
-            tabindex="-1" aria-labelledby="<?php echo $modalId; ?>-title" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <div>
-                            <h2 class="modal-title" id="<?php echo $modalId; ?>-title">Choose Your Lane</h2>
-                            <p><?php echo $serviceLabel; ?> · Tap an option to get your queue ticket.</p>
-                        </div>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="kiosk-lanes">
-                            <button id="<?php echo $regularId; ?>" class="kiosk-lane kiosk-lane-regular"
-                                type="button" data-bs-dismiss="modal">
-                                <img src="<?php echo base_url('vendors/bootstrap-5/female-and-male-shapes-silhouettes.png?v='.VERSION); ?>"
-                                    alt="">
-                                <span class="kiosk-lane-label"><strong>Regular</strong></span>
-                                <span class="kiosk-lane-arrow" aria-hidden="true"></span>
-                            </button>
-                            <button id="<?php echo $specialId; ?>" class="kiosk-lane kiosk-lane-special"
-                                type="button" data-bs-dismiss="modal">
-                                <img src="<?php echo base_url('vendors/bootstrap-5/special-icon.png?v='.VERSION); ?>"
-                                    alt="">
-                                <span class="kiosk-lane-label">
-                                    <strong>Special</strong>
-                                    <span>PWDs • Senior Citizens • Pregnant Women</span>
-                                </span>
-                                <span class="kiosk-lane-arrow" aria-hidden="true"></span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <?php endforeach; ?>
-
-
-    <div class="modal" id="modal-1-4app-blpd" data-bs-keyboard="false" tabindex="-2" aria-labelledby="modal-1-4app"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-md" style="max-width: 750px  !important">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="">Assessment - 1 to 4 Application</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-                        style="min-width: 35px;"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-sm content-regular">
-                            <div id="btn-regular" class="bg-primary btn-modal" data-bs-dismiss="modal"
-                                aria-label="Close">
-                                <img src="<?php echo base_url('vendors/bootstrap-5/female-and-male-shapes-silhouettes.png?v='.VERSION); ?>"
-                                    class="card-img-top" alt="">
-                                <p>Regular lane</p>
-                            </div>
-                        </div>
-                        <div class="col-sm content-special">
-                            <div id="btn-special" class="bg-danger btn-modal" data-bs-dismiss="modal"
-                                aria-label="Close">
-                                <img src="<?php echo base_url('vendors/bootstrap-5/special-icon.png?v='.VERSION); ?>"
-                                    class="card-img-top" alt="">
-                                <p><span>(PWDs, Senior, Pregnant)</span><br>Special lane
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal" id="modal-5-10app-blpd" data-bs-keyboard="false" tabindex="-3" aria-labelledby="modal-1-4app"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-md" style="max-width: 750px  !important">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="">Assessment - 5 to 10 Application</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-                        style="min-width: 35px;"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-sm content-regular">
-                            <div id="btn-regular1" class="bg-primary btn-modal" data-bs-dismiss="modal"
-                                aria-label="Close">
-                                <img src="<?php echo base_url('vendors/bootstrap-5/female-and-male-shapes-silhouettes.png?v='.VERSION); ?>"
-                                    class="card-img-top" alt="">
-                                <p>Regular lane</p>
-                            </div>
-                        </div>
-                        <div class="col-sm content-special">
-                            <div id="btn-special1" class="bg-danger btn-modal" data-bs-dismiss="modal"
-                                aria-label="Close">
-                                <img src="<?php echo base_url('vendors/bootstrap-5/special-icon.png?v='.VERSION); ?>"
-                                    class="card-img-top" alt="">
-                                <p><span>(PWDs, Senior, Pregnant)</span><br>Special lane
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal" id="modal-releasing" data-bs-keyboard="false" tabindex="-3" aria-labelledby="modal-1-4app"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-md" style="max-width: 750px  !important">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="">Releasing</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-                        style="min-width: 35px;"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-sm content-regular">
-                            <div id="btn-regular-releasing" class="bg-primary btn-modal" data-bs-dismiss="modal"
-                                aria-label="Close">
-                                <img src="<?php echo base_url('vendors/bootstrap-5/female-and-male-shapes-silhouettes.png?v='.VERSION); ?>"
-                                    class="card-img-top" alt="">
-                                <p>Regular lane</p>
-                            </div>
-                        </div>
-                        <div class="col-sm content-special">
-                            <div id="btn-special-releasing" class="bg-danger btn-modal" data-bs-dismiss="modal"
-                                aria-label="Close">
-                                <img src="<?php echo base_url('vendors/bootstrap-5/special-icon.png?v='.VERSION); ?>"
-                                    class="card-img-top" alt="">
-                                <p><span>(PWDs, Senior, Pregnant)</span><br>Special lane
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
 
     <div id="printable1">
         <div id="print">
@@ -270,7 +96,7 @@
 
     <script>
     let base_url = "<?php echo base_url(); ?>",
-        _system = "<?php echo $title;?>";
+        _system = "<?php echo isset($title) ? $title : ''; ?>";
     </script>
     <script src="<?php echo base_url('vendors/jquery/jquery-3.3.1.min.js'); ?>" crossorigin="anonymous"></script>
     <script src="<?php echo base_url('vendors/bootstrap-5/js/bootstrap.bundle.min.js'); ?>" crossorigin="anonymous">

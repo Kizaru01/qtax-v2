@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <?php $viewing_asset_version = $this->config->item('queuing_version') . '.6'; ?>
+    <?php $viewing_asset_version = $this->config->item('queuing_version') . '.7'; ?>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -46,9 +46,7 @@
 
             <!-- Cards container -->
             <div class="ns-cards-wrap">
-                <div id="qtax-serving-grid" class="ns-grid">
-                    <div class="ns-empty">Waiting for next customer…</div>
-                </div>
+                <div id="qtax-serving-grid" class="ns-grid"></div>
                 <template id="qtax-serving-card">
                     <article class="ns-card">
                         <div class="ns-card-left">

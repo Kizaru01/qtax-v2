@@ -229,9 +229,8 @@ body.viewing {
     display: grid;
     gap: clamp(4px, 0.8vh, 10px);
 
-    /* Columns/rows driven by JS custom properties */
-    grid-template-columns: repeat(var(--ns-cols, 1), minmax(0, 1fr));
-    grid-template-rows:    repeat(var(--ns-rows, 1), minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(var(--ns-rows, 3), minmax(0, 1fr));
 }
 
 /* ============================================================
@@ -325,21 +324,6 @@ body.viewing {
     text-align: center;
     overflow-wrap: anywhere;
 }
-/* ============================================================
-   EMPTY STATE
-   ============================================================ */
-.ns-empty {
-    grid-column: 1 / -1;
-    grid-row: 1 / -1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #aaa;
-    font-family: Arial, sans-serif;
-    font-size: clamp(14px, 2.2vh, 24px);
-    text-align: center;
-}
-
 .ns-brand {
     justify-content: center;
 }
