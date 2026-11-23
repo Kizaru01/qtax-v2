@@ -1,0 +1,8 @@
+VIEWING LINK
+http://localhost/qlandtax/viewing
+
+GET NUMBER LINK
+http://localhost/qlandtax/number
+
+LOGIN
+http://localhost/qlandtax/

@@ -1,0 +1,1 @@
+{"status":true,"content":[{"id":"16","msg":"Welcome to City of San Fernando (P) ","isactive":"yes"},{"id":"18","msg":"https:\/\/cityofsanfernando.gov.ph","isactive":"yes"}]}

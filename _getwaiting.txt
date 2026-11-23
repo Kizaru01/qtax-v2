@@ -1,0 +1,1 @@
+  {"status":"yes","waiting1to6":[{"number":"1001","window":null},{"number":"1002","window":null},{"number":"2001","window":null},{"number":"2002","window":null},{"number":"1003","window":null},{"number":"2003","window":null}],"pending1to6":false}

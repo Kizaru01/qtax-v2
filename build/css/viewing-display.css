@@ -1,0 +1,415 @@
+/* ============================================================
+   QTAX Now Serving — Full UI Redesign
+   Palette  : navy, blue, red, white, and neutral grays
+   Reference: City of San Fernando QTAX display board
+   ============================================================ */
+
+/* ---- Reset / Base ----------------------------------------- */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #F5F6F8;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body.viewing {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* ============================================================
+   FOOTER — fixed height, sits at the bottom
+   ============================================================ */
+.ns-footer {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background:  #F5F6F8;
+    color: rgb(0, 0, 0);
+    height: 7vh;
+    min-height: 44px;
+    padding: 0 2vw;
+    z-index: 10;
+    position: relative;
+}
+
+.ns-footer-welcome {
+    display: flex;
+    align-items: center;
+    gap: 0.8vw;
+    font-family: "Arial Black", Arial, sans-serif;
+    font-size: clamp(13px, 2.2vh, 26px);
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.ns-footer-datetime {
+    display: flex;
+    align-items: center;
+    gap: 1vw;
+    color: #fff;
+    font-family: "Arial Black", Arial, sans-serif;
+    font-size: clamp(13px, 2.2vh, 26px);
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.ns-footer-date,
+.ns-footer-time {
+    display: flex;
+    align-items: center;
+    gap: 0.5vw;
+}
+
+.ns-footer-sep {
+    opacity: 0.5;
+    font-size: clamp(14px, 2.4vh, 28px);
+}
+
+.ns-footer-icon {
+    width: clamp(16px, 2.6vh, 30px);
+    height: clamp(16px, 2.6vh, 30px);
+    flex-shrink: 0;
+}
+
+.ns-footer-icon [stroke] {
+    stroke: currentColor;
+}
+
+/* ============================================================
+   MAIN LAYOUT — 50/50 split, fills space above footer
+   ============================================================ */
+.ns-layout {
+    flex: 1 1 0;
+    display: flex;
+    min-height: 0;
+    overflow: hidden;
+}
+
+/* ---- LEFT PANEL ------------------------------------------- */
+.ns-left {
+    flex: 0 0 50%;
+    width: 50%;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+    background: #F5F6F8;
+}
+
+/* ---- RIGHT PANEL ------------------------------------------ */
+.ns-right {
+    --ns-video-inset: min(1vh, 1vw);
+    flex: 0 0 50%;
+    width: 50%;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+    background: #fff;
+}
+
+/* ============================================================
+   NOW SERVING HEADER
+   ============================================================ */
+.ns-header {
+    flex: 0 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    background: linear-gradient(105deg, #A21C22, #8A151C 64%, #741219);
+    color: #fff;
+    height: min(13vh, 9vw);
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.ns-header-serving,
+.ns-brand {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    padding: 0 2vw;
+    gap: 1.5vw;
+}
+
+/* Curved red band along the bottom of both bars */
+.ns-header-stripe,
+.ns-footer::before {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background: linear-gradient(105deg, #6C0E13, #A01C23 70%, #851218);
+    clip-path: ellipse(115% 55% at 90% 137%);
+    pointer-events: none;
+}
+
+.ns-footer::before {
+    content: "";
+    background: linear-gradient(105deg, #78141B, #9A1921 75%, #a81620);
+    clip-path: ellipse(58% 126% at 102% 118%);
+}
+
+.ns-header-icon,
+.ns-brand-logo {
+    flex-shrink: 0;
+    width: min(10vh, 8vw);
+    height: min(10vh, 8vw);
+}
+
+.ns-header-icon img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transform: scale(1.2);
+    filter: grayscale(1) invert(1) contrast(1.4);
+    mix-blend-mode: screen;
+}
+
+.ns-header-divider {
+    width: 2px;
+    height: 60%;
+    background: rgba(255,255,255,0.4);
+    flex-shrink: 0;
+}
+
+.ns-header-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.2vh;
+}
+
+.ns-header-title {
+    font-family: "Arial Black", Arial, sans-serif;
+    font-size: min(5vh, 5vw);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+}
+
+.ns-header-subtitle {
+    font-family: Arial, sans-serif;
+    font-size: min(2vh, 2vw);
+    opacity: 0.9;
+    line-height: 1.2;
+}
+
+/* ============================================================
+   CARDS WRAPPER
+   ============================================================ */
+.ns-cards-wrap {
+    flex: 1 1 0;
+    min-height: 0;
+    overflow: hidden;
+    padding: clamp(6px, 1vh, 12px);
+    display: flex;
+    flex-direction: column;
+}
+
+/* ============================================================
+   SERVING GRID
+   ============================================================ */
+.ns-grid {
+    flex: 1 1 0;
+    min-height: 0;
+    display: grid;
+    gap: clamp(4px, 0.8vh, 10px);
+
+    /* Columns/rows driven by JS custom properties */
+    grid-template-columns: repeat(var(--ns-cols, 1), minmax(0, 1fr));
+    grid-template-rows:    repeat(var(--ns-rows, 1), minmax(0, 1fr));
+}
+
+/* ============================================================
+   SERVING CARD
+   ============================================================ */
+.ns-grid.ns-grid-dense {
+    gap: min(0.85vh, 0.8vw);
+}
+
+.ns-card {
+    container-type: size;
+    display: grid;
+    grid-template-columns: 39% 1px minmax(0, 1fr);
+    align-items: center;
+    min-width: 0;
+    min-height: 0;
+    background: #FFFFFF;
+    border: 1px solid #eee;
+    border-radius: min(1.7vh, 1vw);
+    box-shadow: 0 2px 5px rgb(0 0 0 / 15%);
+}
+
+.ns-card-left,
+.ns-card-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 0;
+    line-height: 1;
+}
+
+.ns-card-left {
+    position: relative;
+    height: 100%;
+    padding-inline-start: 4cqw;
+    gap: min(3cqh, 0.7cqw);
+}
+
+.ns-card-left::before {
+    content: "";
+    position: absolute;
+    inset: 13% auto 13% 3cqw;
+    width: min(2.1cqw, 8cqh);
+    border-radius: 999px;
+    background: linear-gradient(#ed0012, #ac000c);
+}
+
+.ns-card-window-label {
+    font-size: min(4cqw, 16cqh, 2.8vh);
+    font-weight: 900;
+    color: #222;
+}
+
+.ns-card-window-num,
+.ns-card-ticket {
+    font-family: "Arial Black", Arial, sans-serif;
+    font-weight: 900;
+    white-space: nowrap;
+}
+
+.ns-card-window-num {
+    font-size: min(11cqw, 51cqh, 11vh);
+    color: #BD1018;
+}
+
+.ns-card-divider {
+    height: min(70cqh, 22cqw);
+    background: #777;
+}
+
+.ns-card-right {
+    align-items: flex-start;
+    padding-inline: 4cqw 2cqw;
+    gap: min(4cqh, 1.1cqw);
+}
+
+.ns-card-ticket {
+    font-size: min(12cqw, 49cqh, 12vh);
+    color: #090909;
+}
+
+.ns-card-service {
+    max-width: 100%;
+    padding: min(2.5cqh, 0.85cqw) 3cqw;
+    border-radius: 999px;
+    color: #222;
+    font-size: min(4.3cqw, 13cqh, 3vh);
+    font-weight: 700;
+    line-height: 1.08;
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+/* ============================================================
+   EMPTY STATE
+   ============================================================ */
+.ns-empty {
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #aaa;
+    font-family: Arial, sans-serif;
+    font-size: clamp(14px, 2.2vh, 24px);
+    text-align: center;
+}
+
+.ns-brand {
+    justify-content: center;
+}
+
+.ns-brand-logo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.ns-brand-divider {
+    width: 2px;
+    height: 55%;
+    background: rgba(255,255,255,0.4);
+    flex-shrink: 0;
+}
+
+.ns-brand-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height: 1.1;
+}
+
+.ns-brand-city {
+    font-family: Arial, sans-serif;
+    font-size: min(2vh, 2vw);
+    font-weight: 400;
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.ns-brand-city strong {
+    display: block;
+    font-family: "Arial Black", Arial, sans-serif;
+    font-size: min(4vh, 3vw);
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    line-height: 1;
+}
+
+.ns-brand-province {
+    font-family: Arial, sans-serif;
+    font-size: min(1.5vh, 1.5vw, 17px);
+    text-transform: uppercase;
+    letter-spacing: 0.29em;
+    font-weight: 400;
+}
+
+/* ============================================================
+   VIDEO PLAYER
+   ============================================================ */
+.ns-video-wrap {
+    margin: var(--ns-video-inset) var(--ns-video-inset) var(--ns-video-inset) 0;
+    border-radius: min(1.7vh, 1vw);
+    overflow: hidden;
+    flex: 1 1 0;
+    min-height: 0;
+    background: #111;
+    display: flex;
+    align-items: stretch;
+}
+
+.ns-video-wrap video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    background: #111;
+}
+
