@@ -142,7 +142,7 @@ function btn_serve(t) {
   }
 
   postAjax(
-    base_url + "transaction/save_trasaction",
+    base_url + "transaction/save_transaction",
     {
       id: t.dataset.id,
       status: "RELEASING-SERVING",
@@ -162,7 +162,7 @@ function btn_finish(t) {
   // r = confirm("Are you sure you want to proceed?");
   // if (r == true) {
   //   postAjax(
-  //     base_url + "transaction/save_trasaction",
+  //     base_url + "transaction/save_transaction",
   //     {
   //       id: t.dataset.id,
   //       status: "FINISHED",
@@ -177,7 +177,7 @@ function btn_finish(t) {
 
 function btn_pending(t) {
   postAjax(
-    base_url + "transaction/save_trasaction",
+    base_url + "transaction/save_transaction",
     {
       id: t.dataset.id,
       status: "RELEASING-PENDING",
@@ -371,7 +371,7 @@ function closeModal() {
 // Function for button action 1
 function action_done(_this) {
   postAjax(
-    base_url + "transaction/save_trasaction",
+    base_url + "transaction/save_transaction",
     {
       id: _this.closest(".modal").dataset.id,
       status: "RELEASING-DONE",
@@ -387,7 +387,7 @@ function action_done(_this) {
 // Function for button action 2
 function action_proceed_to_payment(_this) {
   postAjax(
-    base_url + "transaction/save_trasaction",
+    base_url + "transaction/save_transaction",
     {
       id: _this.closest(".modal").dataset.id,
       status: "FINISHED",

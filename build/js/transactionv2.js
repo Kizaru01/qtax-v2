@@ -165,7 +165,7 @@ function btn_serve(t) {
     }
   }
 
-  postAjax(base_url + 'transaction/save_trasaction', {
+  postAjax(base_url + 'transaction/save_transaction', {
     id: t.dataset.id,
     status: "SERVING",
     window: _w
@@ -180,7 +180,7 @@ function btn_finish(t) {
   r = confirm("Are you sure you want to proceed?");
   if (r == true) {
 
-    postAjax(base_url + 'transaction/save_trasaction', {
+    postAjax(base_url + 'transaction/save_transaction', {
       id: t.dataset.id,
       status: "FINISHED",
       window: _w
@@ -191,7 +191,7 @@ function btn_finish(t) {
 }
 
 function btn_pending(t) {
-  postAjax(base_url + 'transaction/save_trasaction', {
+  postAjax(base_url + 'transaction/save_transaction', {
     id: t.dataset.id,
     status: "PENDING",
     window: _w

@@ -176,7 +176,7 @@ class Transaction extends MX_Controller
       echo json_encode($result);
     }
 
-    public function save_trasaction() {
+    public function save_transaction() {
       $data = array(
         'id' =>  $this->input->post('id'),
         'status' => $this->input->post('status'),
@@ -239,7 +239,7 @@ class Transaction extends MX_Controller
         $data['r_dtdone'] = date("Y-m-d H:i:s");
       }
 
-      if ($result = $this->mdl_transaction->m_save_trasaction($data)) {
+      if ($result = $this->mdl_transaction->m_save_transaction($data)) {
         file_put_contents(basename('/_getviewing.txt'),file_get_contents(base_url().'viewing/ajax_get_viewing'));
 
 

@@ -70,19 +70,21 @@
         </div><!-- /ns-left -->
 
         <!-- ========== RIGHT PANEL ========== -->
-        <div class="ns-right">
+        <!-- <div class="ns-right"> -->
 
             <!-- Video player -->
-            <div class="ns-video-wrap">
+            <!-- <div class="ns-video-wrap">
                 <video id="videoplayer" controls allow="autoplay" onended="onvideoended();">
                     <source src="movie.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
-            </div>
+            </div> -->
 
-        </div><!-- /ns-right -->
+        <!-- </div> -->
+        <!-- /ns-right -->
 
-    </div><!-- /ns-layout -->
+    </div>
+    <!-- /ns-layout -->
 
     <!-- ========== FOOTER ========== -->
     <footer class="ns-footer">
