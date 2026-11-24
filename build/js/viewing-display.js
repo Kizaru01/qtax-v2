@@ -1,7 +1,9 @@
 jQuery("#dt_serving").on("draw.dt", function (event, settings) {
   const records = new jQuery.fn.dataTable.Api(settings).rows().data().toArray();
   const grid = document.getElementById("qtax-serving-grid");
-  const rows = Math.max(3, Math.ceil(records.length / 2));
+  const rows = Math.max(4, Math.ceil(records.length / 2));
+/* if you want to adjust the minimum cards displayed, change the first argument of Math.max
+Math.max(4, Math.ceil(records.length / 2))*/
 
   grid.style.setProperty("--ns-rows", rows);
   grid.classList.toggle("ns-grid-dense", rows > 3);

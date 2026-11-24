@@ -230,7 +230,8 @@ body.viewing {
     gap: clamp(4px, 0.8vh, 10px);
 
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-template-rows: repeat(var(--ns-rows, 3), minmax(0, 1fr));
+    grid-template-rows: repeat(var(--ns-rows, 4), minmax(0, 1fr));
+    /*  grid-template-rows: repeat(var(--ns-rows, 4), minmax(0, 1fr)); */
 }
 
 /* ============================================================
