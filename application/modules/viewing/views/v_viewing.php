@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <?php $viewing_asset_version = $this->config->item('queuing_version') . '.7'; ?>
+    <?php $viewing_asset_version = $this->config->item('queuing_version') . '.8'; ?>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -40,11 +40,9 @@
 
     <!-- ===== MAIN LAYOUT: 50/50 split ===== -->
     <div class="ns-layout">
-
         <!-- ========== LEFT PANEL ========== -->
         <div class="ns-left">
-
-            <!-- Cards container -->
+         <div class="ns-department-title">Assessment</div>
             <div class="ns-cards-wrap">
                 <div id="qtax-serving-grid" class="ns-grid"></div>
                 <template id="qtax-serving-card">
@@ -61,28 +59,17 @@
                     </article>
                 </template>
             </div>
-
             <!-- Hidden DataTable (keeps AJAX/Comet logic intact) -->
             <div hidden>
                 <table id="dt_serving" class="display" style="width:100%;"></table>
             </div>
-
-        </div><!-- /ns-left -->
-
-        <!-- ========== RIGHT PANEL ========== -->
-        <!-- <div class="ns-right"> -->
-
-            <!-- Video player -->
-            <!-- <div class="ns-video-wrap">
-                <video id="videoplayer" controls allow="autoplay" onended="onvideoended();">
-                    <source src="movie.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            </div> -->
-<!-- 
-        </div> -->
-        <!-- /ns-right -->
-
+        </div>
+        <div class="ns-right">
+            <div class="ns-department-title">Payment</div>
+            <div class="ns-cards-wrap">
+                <div id="qtax-payment-grid" class="ns-grid"></div>
+            </div>
+        </div>
     </div>
     <!-- /ns-layout -->
 

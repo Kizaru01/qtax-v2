@@ -39,84 +39,10 @@ let x = document.getElementById("bell"),
     "Oct",
     "Nov",
     "Dec",
-  ],
-  video_list = [],
-  video_index = 0,
-  video_player = document.getElementById("videoplayer");
-
-var getJSON = function (url) {
-  return new Promise(function (resolve, reject) {
-    var xhr = new XMLHttpRequest();
-    xhr.open("get", url, true);
-    xhr.responseType = "json";
-    xhr.onload = function () {
-      var status = xhr.status;
-      if (status == 200) {
-        resolve(xhr.response);
-      } else {
-        reject(status);
-      }
-    };
-    xhr.send();
-  });
-};
-
-//document ready
-// document.onreadystatechange = () => {
-//   if (document.readyState === 'complete') {
-getJSON(base_url + "viewing/ajax_get_file").then(
-  function (data) {  
-    if (!video_player) return; // Add this
-    if ((data.status = "yes")) {
-      video_list = data.content;
-      video_player.setAttribute("src", video_list[video_index]);
-      var promise = video_player.play();
-      video_player.volume = 0.9;
-
-      if (promise !== undefined) {
-        promise
-          .then((_) => {
-            // Autoplay started!
-          })
-          .catch((error) => {
-            // Autoplay was prevented.
-            // Show a "Play" button so that user can start playback.
-          });
-      }
-    }
-  },
-  function (status) {
-    // alert('Something went wrong.');
-  }
-);
-//   }
-// };
-
+  ];
+  
 const playAudio = () => x.play();
 const pauseAudio = () => x.pause();
-const onvideoended = () => {
-  if (video_index < video_list.length - 1) {
-    video_index++;
-  } else {
-    video_index = 0;
-  }
-  video_player.setAttribute("src", video_list[video_index]);
-  // video_player.play();
-
-  var promise = video_player.play();
-
-  if (promise !== undefined) {
-    promise
-      .then((_) => {
-        // Autoplay started!
-        // video_player.play();
-      })
-      .catch((error) => {
-        // Autoplay was prevented.
-        // Show a "Play" button so that user can start playback.
-      });
-  }
-};
 
 var myVar = setInterval(myTimer, 1000);
 
