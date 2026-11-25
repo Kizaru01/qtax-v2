@@ -7,9 +7,7 @@ let x = document.getElementById("bell"),
   dt_serving = null,
   _dt_serving = false,
   dt_serving_count = 0,
-  // dt_serving_payment = null,
-  // _dt_serving_payment = false,
-  // dt_serving_count_payment = 0,
+  dt_serving_count_payment = 0,
   _oras = null,
   _d = null,
   dd = new Date(),
@@ -39,84 +37,7 @@ let x = document.getElementById("bell"),
     "Oct",
     "Nov",
     "Dec",
-  ],
-  video_list = [],
-  video_index = 0,
-  video_player = document.getElementById("videoplayer");
-
-var getJSON = function (url) {
-  return new Promise(function (resolve, reject) {
-    var xhr = new XMLHttpRequest();
-    xhr.open("get", url, true);
-    xhr.responseType = "json";
-    xhr.onload = function () {
-      var status = xhr.status;
-      if (status == 200) {
-        resolve(xhr.response);
-      } else {
-        reject(status);
-      }
-    };
-    xhr.send();
-  });
-};
-
-//document ready
-// document.onreadystatechange = () => {
-//   if (document.readyState === 'complete') {
-getJSON(base_url + "viewing/ajax_get_file").then(
-  function (data) {  
-    if (!video_player) return; // Add this
-    if ((data.status = "yes")) {
-      video_list = data.content;
-      video_player.setAttribute("src", video_list[video_index]);
-      var promise = video_player.play();
-      video_player.volume = 0.9;
-
-      if (promise !== undefined) {
-        promise
-          .then((_) => {
-            // Autoplay started!
-          })
-          .catch((error) => {
-            // Autoplay was prevented.
-            // Show a "Play" button so that user can start playback.
-          });
-      }
-    }
-  },
-  function (status) {
-    // alert('Something went wrong.');
-  }
-);
-//   }
-// };
-
-const playAudio = () => x.play();
-const pauseAudio = () => x.pause();
-const onvideoended = () => {
-  if (video_index < video_list.length - 1) {
-    video_index++;
-  } else {
-    video_index = 0;
-  }
-  video_player.setAttribute("src", video_list[video_index]);
-  // video_player.play();
-
-  var promise = video_player.play();
-
-  if (promise !== undefined) {
-    promise
-      .then((_) => {
-        // Autoplay started!
-        // video_player.play();
-      })
-      .catch((error) => {
-        // Autoplay was prevented.
-        // Show a "Play" button so that user can start playback.
-      });
-  }
-};
+  ];
 
 var myVar = setInterval(myTimer, 1000);
 
@@ -125,46 +46,23 @@ function myTimer() {
   t_time1.innerHTML = d.toLocaleTimeString().replace(/:(\d{2}) (?=[AP]M)/, " ");
 }
 
-function ifpayment(p) {
-  return (p = p == "NO" ? "" : "PAYMENT ONLY");
+function isPaymentServing(type, status) {
+  return status === "PAYMENT-SERVING" ||
+    type === "REGULAR5-10" || type === "SPECIAL5-10";
 }
 
-function iftype(p, type, status) {
-  txt = "";
+function iftype(type, status) {
+  var priority = type === "SPECIAL" || type === "SPECIAL5-10" ||
+    type === "SPECIAL-TAX" || type === "PSPECIAL" || type === "PSPECIAL5-10";
+  var service = "";
 
-  if (type == "REGULAR") {
-    txt = "Assessment";
-  } else if (type == "SPECIAL") {
-    txt = "Assessment - PWDs, Senior, Pregnant";
-  } else if (type == "REGULAR5-10") {
-    txt = "Payment";
-  } else if (type == "SPECIAL5-10") {
-    txt = "Payment - PWDs, Senior, Pregnant";
+  if (isPaymentServing(type, status)) {
+    service = "Payment";
+  } else if (type === "REGULAR" || type === "SPECIAL") {
+    service = "Assessment";
   }
 
-  // txt = "(PAYMENT) PWDs, Senior, Pregnant";
-  // if (p == "YES") {
-  //   if (type == "SPECIAL-TAX") {
-  //     txt = "(PAYMENT) PWDs, Senior, Pregnant";
-  //   } else if (type == "REGULAR-TAX") {
-  //     txt = "Tax Bill/ Closure";
-  //   } else {
-  //     txt = "Payment Only";
-  //   }
-  // } else {
-  //   if (type == "REGULAR-TAX" || type == "SPECIAL-TAX") {
-  //     txt = "Tax Bill/ Closure";
-  //   } else if (type == "REGULAR") {
-  //     txt = status == "VERIFY" ? "Assessment - verifiying" : "Payment";
-  //   } else if (type == "SPECIAL") {
-  //     txt = "(Assessment) PWDs, Senior, Pregnant";
-  //   } else if (type == "SPECIAL5-10") {
-  //     txt = "(Assessment 5-10) PWDs, Senior, Pregnant";
-  //   } else if (type == "RELEASING-REGULAR" || type == "RELEASING-SPECIAL") {
-  //     txt = "Releasing";
-  //   }
-  // }
-  return txt;
+  return service && priority ? service + " - PWDs, Senior, Pregnant" : service;
 }
 
 // $(function() {
@@ -181,20 +79,14 @@ dt_serving = $("#dt_serving").DataTable({
     type: "GET",
     // "url": base_url + "transaction/ajax_get_cassessment",
     url: base_url + "_getviewing.txt",
-    dataSrc: "serving",
+    dataSrc: function (json) {
+      return (json.serving || []).concat(json.serving_payment || []);
+    },
   },
   columns: [
     {
-      data: function (data) {
-        return `
-                <div class="col-left">${data.number} <span>${iftype(
-          data.ifpayment,
-          data.type,
-          data.status
-        )}</span></div>
-                <div class="col-right">${data.window}<span>window</span></div>
-                `;
-      },
+      data: "number",
+      render: $.fn.dataTable.render.text(),
     },
   ],
   scrollCollapse: true,
@@ -212,45 +104,6 @@ dt_serving = $("#dt_serving").DataTable({
     _dt_serving = true;
   },
 });
-
-// dt_serving_payment = $("#dt_serving_payment").DataTable({
-//   ajax: {
-//     type: "GET",
-//     // "url": base_url + "transaction/ajax_get_cassessment",
-//     url: base_url + "_getviewing.txt",
-//     dataSrc: "serving_payment",
-//   },
-//   columns: [
-//     {
-//       data: function (data) {
-//         return `
-//                 <div class="col-left">${data.number} <span>${iftype(
-//           data.ifpayment,
-//           data.type,
-//           data.status
-//         )}</span></div>
-//                 <div class="col-right">${data.window}<span>window</span></div>
-//                 `;
-//       },
-//     },
-//   ],
-//   scrollCollapse: true,
-//   info: false,
-//   paging: false,
-//   searching: false,
-//   ordering: false,
-//   fnCreatedRow: function (nRow, data, iDisplayIndex) {
-//     $(nRow).attr("data-id", data.id);
-//     $(nRow).attr("data-id", data.id);
-//     $(nRow).addClass("payment-" + data.ifpayment);
-//   },
-//   initComplete: function (oSettings, json) {
-//     // get_waiting();
-//     _dt_serving_payment = true;
-//   },
-// });
-
-// });
 
 /*
 function get_waiting() {
@@ -331,10 +184,15 @@ Comet1.prototype = {
   },
   disconnect: function () {},
   handleResponse: function (response) {
+     console.log("Viewing response received:", response);
     if (_dt_serving == true) {
       // get_waiting();
+       console.log("Reloading DataTable...");
       dt_serving.ajax.reload(function (json) {
-        if (dt_serving.data().count() > dt_serving_count) {
+           console.log("Updated queue data:", json);
+        var servingCount = (json.serving || []).length;
+        var paymentCount = (json.serving_payment || []).length;
+        if (servingCount > dt_serving_count || paymentCount > dt_serving_count_payment) {
           // x.play();
 
           var promise = x.play();
@@ -350,31 +208,10 @@ Comet1.prototype = {
               });
           }
         }
-        dt_serving_count = dt_serving.data().count();
+        dt_serving_count = servingCount;
+        dt_serving_count_payment = paymentCount;
       });
     }
-    // if (_dt_serving_payment == true) {
-    //   // get_waiting();
-    //   dt_serving_payment.ajax.reload(function (json) {
-    //     if (dt_serving_payment.data().count() > dt_serving_count_payment) {
-    //       // x.play();
-
-    //       var promise = x.play();
-
-    //       if (promise !== undefined) {
-    //         promise
-    //           .then((_) => {
-    //             // Autoplay started!
-    //           })
-    //           .catch((error) => {
-    //             // Autoplay was prevented.
-    //             // Show a "Play" button so that user can start playback.
-    //           });
-    //       }
-    //     }
-    //     dt_serving_count_payment = dt_serving_payment.data().count();
-    //   });
-    // }
   },
   doRequest: function (request) {
     new Ajax.Request(this.url, {

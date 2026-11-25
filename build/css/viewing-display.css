@@ -46,8 +46,8 @@ body.viewing {
 .ns-footer-welcome {
     display: flex;
     align-items: center;
-    gap: 0.8vw;
     font-family: "Arial Black", Arial, sans-serif;
+    font-size: 2.2vh;
     font-size: clamp(13px, 2.2vh, 26px);
     font-weight: 700;
     white-space: nowrap;
@@ -56,9 +56,9 @@ body.viewing {
 .ns-footer-datetime {
     display: flex;
     align-items: center;
-    gap: 1vw;
     color: #fff;
     font-family: "Arial Black", Arial, sans-serif;
+    font-size: 2.2vh;
     font-size: clamp(13px, 2.2vh, 26px);
     font-weight: 700;
     white-space: nowrap;
@@ -68,15 +68,30 @@ body.viewing {
 .ns-footer-time {
     display: flex;
     align-items: center;
-    gap: 0.5vw;
+}
+
+.ns-footer-welcome > * + * {
+    margin-left: 0.8vw;
+}
+
+.ns-footer-datetime > * + * {
+    margin-left: 1vw;
+}
+
+.ns-footer-date > * + *,
+.ns-footer-time > * + * {
+    margin-left: 0.5vw;
 }
 
 .ns-footer-sep {
     opacity: 0.5;
+    font-size: 2.4vh;
     font-size: clamp(14px, 2.4vh, 28px);
 }
 
 .ns-footer-icon {
+    width: 2.6vh;
+    height: 2.6vh;
     width: clamp(16px, 2.6vh, 30px);
     height: clamp(16px, 2.6vh, 30px);
     flex-shrink: 0;
@@ -96,31 +111,6 @@ body.viewing {
     overflow: hidden;
 }
 
-/* ---- LEFT PANEL ------------------------------------------- */
-.ns-left {
-    flex: 0 0 50%;
-    width: 50%;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    min-height: 0;
-    overflow: hidden;
-    background: #F5F6F8;
-}
-
-/* ---- RIGHT PANEL ------------------------------------------ */
-.ns-right {
-    --ns-video-inset: min(1vh, 1vw);
-    flex: 0 0 50%;
-    width: 50%;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    min-height: 0;
-    overflow: hidden;
-    background: #fff;
-}
-
 /* ============================================================
    NOW SERVING HEADER
    ============================================================ */
@@ -130,9 +120,12 @@ body.viewing {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     background: linear-gradient(105deg, #A21C22, #8A151C 64%, #741219);
     color: #fff;
+    height: 13vh;
+    max-height: 9vw;
     height: min(13vh, 9vw);
     position: relative;
     overflow: hidden;
+    z-index: 0;
     isolation: isolate;
 }
 
@@ -142,7 +135,11 @@ body.viewing {
     align-items: center;
     min-width: 0;
     padding: 0 2vw;
-    gap: 1.5vw;
+}
+
+.ns-header-serving > * + *,
+.ns-brand > * + * {
+    margin-left: 1.5vw;
 }
 
 /* Curved red band along the bottom of both bars */
@@ -150,7 +147,10 @@ body.viewing {
 .ns-footer::before {
     position: absolute;
     z-index: -1;
-    inset: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     background: linear-gradient(105deg, #6C0E13, #A01C23 70%, #851218);
     clip-path: ellipse(115% 55% at 90% 137%);
     pointer-events: none;
@@ -165,6 +165,10 @@ body.viewing {
 .ns-header-icon,
 .ns-brand-logo {
     flex-shrink: 0;
+    width: 10vh;
+    height: 10vh;
+    max-width: 8vw;
+    max-height: 8vw;
     width: min(10vh, 8vw);
     height: min(10vh, 8vw);
 }
@@ -190,11 +194,15 @@ body.viewing {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 0.2vh;
+}
+
+.ns-header-subtitle {
+    margin-top: 0.2vh;
 }
 
 .ns-header-title {
     font-family: "Arial Black", Arial, sans-serif;
+    font-size: 5vh;
     font-size: min(5vh, 5vw);
     font-weight: 900;
     line-height: 1.1;
@@ -203,6 +211,7 @@ body.viewing {
 
 .ns-header-subtitle {
     font-family: Arial, sans-serif;
+    font-size: 2vh;
     font-size: min(2vh, 2vw);
     opacity: 0.9;
     line-height: 1.2;
@@ -212,12 +221,28 @@ body.viewing {
    CARDS WRAPPER
    ============================================================ */
 .ns-cards-wrap {
-    flex: 1 1 0;
+    flex: 0 0 50%;
+    min-width: 0;
     min-height: 0;
     overflow: hidden;
+    padding: 1vh;
     padding: clamp(6px, 1vh, 12px);
     display: flex;
     flex-direction: column;
+}
+
+.ns-section-title {
+    font-family: "Arial Black", Arial, sans-serif;
+    font-size: 3vh;
+    font-size: clamp(15px, 3vh, 32px);
+    line-height: 1.2;
+    margin-bottom: 0.8vh;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.ns-payment .ns-card-window-num {
+    color: #1D4ED8;
 }
 
 /* ============================================================
@@ -227,20 +252,16 @@ body.viewing {
     flex: 1 1 0;
     min-height: 0;
     display: grid;
-    gap: clamp(4px, 0.8vh, 10px);
+    grid-gap: 0.8vh;
+    grid-gap: min(0.85vh, 0.8vw);
 
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-template-rows: repeat(var(--ns-rows, 4), minmax(0, 1fr));
-    /*  grid-template-rows: repeat(var(--ns-rows, 4), minmax(0, 1fr)); */
+    grid-template-rows: repeat(4, minmax(0, 1fr));
 }
 
 /* ============================================================
    SERVING CARD
    ============================================================ */
-.ns-grid.ns-grid-dense {
-    gap: min(0.85vh, 0.8vw);
-}
-
 .ns-card {
     container-type: size;
     display: grid;
@@ -250,8 +271,9 @@ body.viewing {
     min-height: 0;
     background: #FFFFFF;
     border: 1px solid #eee;
+    border-radius: 1vw;
     border-radius: min(1.7vh, 1vw);
-    box-shadow: 0 2px 5px rgb(0 0 0 / 15%);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
 }
 
 .ns-card-left,
@@ -267,20 +289,34 @@ body.viewing {
 .ns-card-left {
     position: relative;
     height: 100%;
-    padding-inline-start: 4cqw;
-    gap: min(3cqh, 0.7cqw);
+    padding-left: 4em;
+    padding-left: 4cqw;
+}
+
+.ns-card-window-num {
+    margin-top: 0.07em;
+    margin-top: min(3cqh, 0.7cqw);
 }
 
 .ns-card-left::before {
     content: "";
     position: absolute;
-    inset: 13% auto 13% 3cqw;
+    top: 13%;
+    bottom: 13%;
+    left: 3em;
+    left: 3cqw;
+    width: 2.1em;
     width: min(2.1cqw, 8cqh);
     border-radius: 999px;
     background: linear-gradient(#ed0012, #ac000c);
 }
 
+.ns-payment .ns-card-left::before {
+    background: #1D4ED8;
+}
+
 .ns-card-window-label {
+    font-size: 4em;
     font-size: min(4cqw, 16cqh, 2.8vh);
     font-weight: 900;
     color: #222;
@@ -294,35 +330,45 @@ body.viewing {
 }
 
 .ns-card-window-num {
+    font-size: 11em;
     font-size: min(11cqw, 51cqh, 11vh);
     color: #BD1018;
 }
 
 .ns-card-divider {
+    height: 70%;
+    max-height: 22em;
     height: min(70cqh, 22cqw);
+    max-height: 22cqw;
     background: #777;
 }
 
 .ns-card-right {
     align-items: flex-start;
-    padding-inline: 4cqw 2cqw;
-    gap: min(4cqh, 1.1cqw);
+    padding: 0 2em 0 4em;
+    padding: 0 2cqw 0 4cqw;
 }
 
 .ns-card-ticket {
+    font-size: 12em;
     font-size: min(12cqw, 49cqh, 12vh);
     color: #090909;
 }
 
 .ns-card-service {
     max-width: 100%;
+    margin-top: 0.26em;
+    margin-top: min(4cqh, 1.1cqw);
+    padding: 0.2em 0.7em;
     padding: min(2.5cqh, 0.85cqw) 3cqw;
     border-radius: 999px;
     color: #222;
+    font-size: 4.3em;
     font-size: min(4.3cqw, 13cqh, 3vh);
     font-weight: 700;
     line-height: 1.08;
     text-align: center;
+    overflow-wrap: break-word;
     overflow-wrap: anywhere;
 }
 .ns-brand {
@@ -352,6 +398,7 @@ body.viewing {
 
 .ns-brand-city {
     font-family: Arial, sans-serif;
+    font-size: 2vh;
     font-size: min(2vh, 2vw);
     font-weight: 400;
     display: block;
@@ -362,6 +409,7 @@ body.viewing {
 .ns-brand-city strong {
     display: block;
     font-family: "Arial Black", Arial, sans-serif;
+    font-size: 3vw;
     font-size: min(4vh, 3vw);
     font-weight: 900;
     letter-spacing: -0.01em;
@@ -370,31 +418,19 @@ body.viewing {
 
 .ns-brand-province {
     font-family: Arial, sans-serif;
+    font-size: 1.5vh;
     font-size: min(1.5vh, 1.5vw, 17px);
     text-transform: uppercase;
     letter-spacing: 0.29em;
     font-weight: 400;
 }
 
-/* ============================================================
-   VIDEO PLAYER
-   ============================================================ */
-.ns-video-wrap {
-    margin: var(--ns-video-inset) var(--ns-video-inset) var(--ns-video-inset) 0;
-    border-radius: min(1.7vh, 1vw);
-    overflow: hidden;
-    flex: 1 1 0;
-    min-height: 0;
-    background: #111;
-    display: flex;
-    align-items: stretch;
+.assessment-title {
+    background-color: #FBE6E7;
+    color: #B91020;
 }
 
-.ns-video-wrap video {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    display: block;
-    background: #111;
+.payment-title {
+    background-color: #E1EBFC;
+    color: #1D4ED8;
 }
-

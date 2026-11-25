@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <?php $viewing_asset_version = $this->config->item('queuing_version') . '.7'; ?>
+    <?php $viewing_asset_version = $this->config->item('queuing_version') . '.10'; ?>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -38,53 +38,34 @@
         <div class="ns-header-stripe" aria-hidden="true"></div>
     </header>
 
-    <!-- ===== MAIN LAYOUT: 50/50 split ===== -->
     <div class="ns-layout">
-
-        <!-- ========== LEFT PANEL ========== -->
-        <div class="ns-left">
-
-            <!-- Cards container -->
-            <div class="ns-cards-wrap">
-                <div id="qtax-serving-grid" class="ns-grid"></div>
-                <template id="qtax-serving-card">
-                    <article class="ns-card">
-                        <div class="ns-card-left">
-                            <span class="ns-card-window-label">WINDOW</span>
-                            <span class="ns-card-window-num"></span>
-                        </div>
-                        <div class="ns-card-divider" aria-hidden="true"></div>
-                        <div class="ns-card-right">
-                            <span class="ns-card-ticket"></span>
-                            <span class="ns-card-service"></span>
-                        </div>
-                    </article>
-                </template>
-            </div>
-
-            <!-- Hidden DataTable (keeps AJAX/Comet logic intact) -->
-            <div hidden>
-                <table id="dt_serving" class="display" style="width:100%;"></table>
-            </div>
-
-        </div><!-- /ns-left -->
-
-        <!-- ========== RIGHT PANEL ========== -->
-        <!-- <div class="ns-right"> -->
-
-            <!-- Video player -->
-            <!-- <div class="ns-video-wrap">
-                <video id="videoplayer" controls allow="autoplay" onended="onvideoended();">
-                    <source src="movie.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            </div> -->
-<!-- 
-        </div> -->
-        <!-- /ns-right -->
-
+        <section class="ns-cards-wrap" aria-labelledby="qtax-assessment-title">
+            <h2 id="qtax-assessment-title" class="ns-section-title assessment-title">Assessment</h2>
+            <div id="qtax-assessment-grid" class="ns-grid"></div>
+        </section>
+        <section class="ns-cards-wrap ns-payment" aria-labelledby="qtax-payment-title">
+            <h2 id="qtax-payment-title" class="ns-section-title payment-title">Payment</h2>
+            <div id="qtax-payment-grid" class="ns-grid"></div>
+        </section>
     </div>
-    <!-- /ns-layout -->
+
+    <template id="qtax-serving-card">
+        <article class="ns-card">
+            <div class="ns-card-left">
+                <span class="ns-card-window-label">WINDOW</span>
+                <span class="ns-card-window-num"></span>
+            </div>
+            <div class="ns-card-divider" aria-hidden="true"></div>
+            <div class="ns-card-right">
+                <span class="ns-card-ticket"></span>
+                <span class="ns-card-service"></span>
+            </div>
+        </article>
+    </template>
+
+    <div hidden>
+        <table id="dt_serving" class="display" style="width:100%;"></table>
+    </div>
 
     <!-- ========== FOOTER ========== -->
     <footer class="ns-footer">
