@@ -65,7 +65,8 @@ var getJSON = function (url) {
 // document.onreadystatechange = () => {
 //   if (document.readyState === 'complete') {
 getJSON(base_url + "viewing/ajax_get_file").then(
-  function (data) {
+  function (data) {  
+    if (!video_player) return; // Add this
     if ((data.status = "yes")) {
       video_list = data.content;
       video_player.setAttribute("src", video_list[video_index]);
