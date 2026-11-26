@@ -315,14 +315,14 @@ body.viewing {
 
 .ns-card-service {
     max-width: 100%;
-    padding: min(2.5cqh, 0.85cqw) 3cqw;
-    border-radius: 999px;
-    color: #222;
-    font-size: min(4.3cqw, 13cqh, 3vh);
+    padding: 4px 2px;
+    font-size: 16px;
+    font-size: 1.1vw;
     font-weight: 700;
     line-height: 1.08;
-    text-align: center;
-    overflow-wrap: anywhere;
+    text-align: left;
+    white-space: nowrap;
+    align-self: flex-start;
 }
 .ns-brand {
     justify-content: center;
