@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Mdl_transaction extends CI_Model
 {
 
-  // public function m_save_trasaction($data) {
+  // public function m_save_transaction($data) {
 	// 	if($this->db->insert('tbl_transaction',$data)) {
   //   	return TRUE;
 	// 	} else {
@@ -12,7 +12,7 @@ class Mdl_transaction extends CI_Model
 	// 	}
 	// }
 
-  public function m_save_trasaction($data) {
+  public function m_save_transaction($data) {
 		$id = $data['id'];
 		unset($data['id']);
 		$this->db->where('id', $id);

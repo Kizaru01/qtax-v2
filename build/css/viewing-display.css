@@ -10,22 +10,45 @@
     margin: 0;
     padding: 0;
 }
+/* Regular */
+@font-face {
+    font-family: "QTAX Roboto";
+    src: url("../static/Roboto-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
 
-html, body {
+/* Bold */
+@font-face {
+    font-family: "QTAX Roboto";
+    src: url("../static/Roboto-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+}
+
+/* Black - for large ticket numbers */
+@font-face {
+    font-family: "QTAX Roboto";
+    src: url("../static/Roboto-Black.ttf") format("truetype");
+    font-weight: 900;
+    font-style: normal;
+}
+html,
+body {
     width: 100%;
     height: 100%;
     overflow: hidden;
     background: #F5F6F8;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "QTAX Roboto", Arial, sans-serif;
 }
 
 body.viewing {
     display: flex;
     flex-direction: column;
+    height: 100%;
     height: 100vh;
     overflow: hidden;
 }
-
 /* ============================================================
    FOOTER — fixed height, sits at the bottom
    ============================================================ */
@@ -36,6 +59,7 @@ body.viewing {
     justify-content: space-between;
     background:  #F5F6F8;
     color: rgb(0, 0, 0);
+    height: 76px;
     height: 7vh;
     min-height: 44px;
     padding: 0 2vw;
@@ -110,7 +134,6 @@ body.viewing {
 
 /* ---- RIGHT PANEL ------------------------------------------ */
 .ns-right {
-    --ns-video-inset: min(1vh, 1vw);
     flex: 0 0 50%;
     width: 50%;
     min-width: 0;
@@ -118,23 +141,31 @@ body.viewing {
     flex-direction: column;
     min-height: 0;
     overflow: hidden;
-    background: #fff;
+    background: #F5F6F8;
 }
 
 /* ============================================================
    NOW SERVING HEADER
    ============================================================ */
+
 .ns-header {
     flex: 0 0 auto;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     background: linear-gradient(105deg, #A21C22, #8A151C 64%, #741219);
     color: #fff;
+
+    /* Fallbacks for older browsers */
+    height: 140px;
+    height: 13vh;
+
+    /* Modern browser enhancement */
     height: min(13vh, 9vw);
+
     position: relative;
     overflow: hidden;
-    isolation: isolate;
 }
+
 
 .ns-header-serving,
 .ns-brand {
@@ -150,7 +181,12 @@ body.viewing {
 .ns-footer::before {
     position: absolute;
     z-index: -1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     inset: 0;
+    background-color: #851218;
     background: linear-gradient(105deg, #6C0E13, #A01C23 70%, #851218);
     clip-path: ellipse(115% 55% at 90% 137%);
     pointer-events: none;
@@ -165,6 +201,10 @@ body.viewing {
 .ns-header-icon,
 .ns-brand-logo {
     flex-shrink: 0;
+    width: 100px;
+    height: 100px;
+    width: 10vh;
+    height: 10vh;
     width: min(10vh, 8vw);
     height: min(10vh, 8vw);
 }
@@ -215,7 +255,8 @@ body.viewing {
     flex: 1 1 0;
     min-height: 0;
     overflow: hidden;
-    padding: clamp(6px, 1vh, 12px);
+    padding: 8px;
+    padding: 1vh;
     display: flex;
     flex-direction: column;
 }
@@ -223,35 +264,37 @@ body.viewing {
 /* ============================================================
    SERVING GRID
    ============================================================ */
+
 .ns-grid {
     flex: 1 1 0;
     min-height: 0;
     display: grid;
-    gap: clamp(4px, 0.8vh, 10px);
-
-    /* Columns/rows driven by JS custom properties */
-    grid-template-columns: repeat(var(--ns-cols, 1), minmax(0, 1fr));
-    grid-template-rows:    repeat(var(--ns-rows, 1), minmax(0, 1fr));
+    gap: 8px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(var(--ns-rows, 4), minmax(0, 1fr));
 }
+
+.ns-grid.ns-grid-dense {
+    gap: 6px;
+}
+
+
 
 /* ============================================================
-   SERVING CARD
+   SERVING CARD — CROSS-BROWSER COMPATIBLE
+   Reference display: 1920 x 1080
    ============================================================ */
-.ns-grid.ns-grid-dense {
-    gap: min(0.85vh, 0.8vw);
-}
 
 .ns-card {
-    container-type: size;
     display: grid;
     grid-template-columns: 39% 1px minmax(0, 1fr);
     align-items: center;
     min-width: 0;
     min-height: 0;
     background: #FFFFFF;
-    border: 1px solid #eee;
-    border-radius: min(1.7vh, 1vw);
-    box-shadow: 0 2px 5px rgb(0 0 0 / 15%);
+    border: 1px solid #EEEEEE;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
 }
 
 .ns-card-left,
@@ -259,7 +302,6 @@ body.viewing {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
     min-width: 0;
     line-height: 1;
 }
@@ -267,77 +309,74 @@ body.viewing {
 .ns-card-left {
     position: relative;
     height: 100%;
-    padding-inline-start: 4cqw;
-    gap: min(3cqh, 0.7cqw);
+    padding-left: 20px;
+    align-items: center;
 }
 
 .ns-card-left::before {
     content: "";
     position: absolute;
-    inset: 13% auto 13% 3cqw;
-    width: min(2.1cqw, 8cqh);
+    top: 13%;
+    bottom: 13%;
+    left: 14px;
+    width: 6px;
     border-radius: 999px;
-    background: linear-gradient(#ed0012, #ac000c);
+    background: linear-gradient(#ED0012, #AC000C);
 }
 
 .ns-card-window-label {
-    font-size: min(4cqw, 16cqh, 2.8vh);
+    font-size: 19px;
     font-weight: 900;
-    color: #222;
+    color: #222222;
 }
 
 .ns-card-window-num,
 .ns-card-ticket {
-    font-family: "Arial Black", Arial, sans-serif;
+    font-family: "QTAX Roboto", Arial, sans-serif;
     font-weight: 900;
     white-space: nowrap;
 }
 
 .ns-card-window-num {
-    font-size: min(11cqw, 51cqh, 11vh);
+    font-size: 52px;
     color: #BD1018;
 }
 
 .ns-card-divider {
-    height: min(70cqh, 22cqw);
-    background: #777;
+    height: 70%;
+    background: #777777;
 }
 
 .ns-card-right {
     align-items: flex-start;
-    padding-inline: 4cqw 2cqw;
-    gap: min(4cqh, 1.1cqw);
+    padding-left: 20px;
+    padding-right: 10px;
 }
 
 .ns-card-ticket {
-    font-size: min(12cqw, 49cqh, 12vh);
+    font-size: 56px;
     color: #090909;
 }
 
 .ns-card-service {
     max-width: 100%;
-    padding: min(2.5cqh, 0.85cqw) 3cqw;
-    border-radius: 999px;
-    color: #222;
-    font-size: min(4.3cqw, 13cqh, 3vh);
+    padding: 0;
+    font-family: "QTAX Roboto", Arial, sans-serif;
+    font-size: 16px;
     font-weight: 700;
     line-height: 1.08;
-    text-align: center;
-    overflow-wrap: anywhere;
+    text-align: left;
+    white-space: nowrap;
+    align-self: flex-start;
 }
-/* ============================================================
-   EMPTY STATE
-   ============================================================ */
-.ns-empty {
-    grid-column: 1 / -1;
-    grid-row: 1 / -1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #aaa;
-    font-family: Arial, sans-serif;
-    font-size: clamp(14px, 2.2vh, 24px);
-    text-align: center;
+
+/* PAYMENT ACCENT */
+.ns-right .ns-card-window-num {
+    color: #2563EB;
+}
+
+.ns-right .ns-card-left::before {
+    background: linear-gradient(#2563EB, #1E40AF);
 }
 
 .ns-brand {
@@ -390,26 +429,41 @@ body.viewing {
     letter-spacing: 0.29em;
     font-weight: 400;
 }
-
-/* ============================================================
-   VIDEO PLAYER
-   ============================================================ */
-.ns-video-wrap {
-    margin: var(--ns-video-inset) var(--ns-video-inset) var(--ns-video-inset) 0;
-    border-radius: min(1.7vh, 1vw);
-    overflow: hidden;
-    flex: 1 1 0;
-    min-height: 0;
-    background: #111;
-    display: flex;
-    align-items: stretch;
+.ns-department-title {
+    flex: 0 0 auto;
+    padding: 10px 0;
+    text-align: center;
+    font-family: "Arial Black", Arial, sans-serif;
+    font-size: 3vh;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #FFFFFF;
+}.ns-left .ns-department-title {
+    background-color: #a91620;
 }
 
-.ns-video-wrap video {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    display: block;
-    background: #111;
+.ns-right .ns-department-title {
+    background-color: #1e569a;
+}
+.ns-right .ns-card-window-num {
+    color: #2563EB;
+}
+.ns-right .ns-card-left::before {
+    background: linear-gradient(#2563EB, #1E40AF);
+}
+.ns-footer-welcome,
+.ns-footer-datetime,
+.ns-header-title,
+.ns-department-title,
+.ns-brand-city strong {
+    font-family: "QTAX Roboto", Arial, sans-serif;
+    font-weight: 900;
+}
+.ns-card-left > * + * {
+    margin-top: 8px;
 }
 
+.ns-card-right > * + * {
+    margin-top: 8px;
+}

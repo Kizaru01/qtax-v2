@@ -308,7 +308,7 @@ function btn_serve(t) {
   }
 
   postAjax(
-    base_url + "transaction/save_trasaction",
+    base_url + "transaction/save_transaction",
     {
       id: t.dataset.id,
       status: "SERVING",
@@ -318,7 +318,6 @@ function btn_serve(t) {
       // dt_reload(t);
     }
   );
-
   return false;
 }
 
@@ -328,7 +327,7 @@ function btn_finish(t, remarks, status) {
   // r = confirm("Are you sure you want to proceed?");
   // if (r == true) {
   //   postAjax(
-  //     base_url + "transaction/save_trasaction",
+  //     base_url + "transaction/save_transaction",
   //     {
   //       id: t.dataset.id,
   //       status: "FINISHED",
@@ -343,7 +342,7 @@ function btn_finish(t, remarks, status) {
 
 function btn_pending(t) {
   postAjax(
-    base_url + "transaction/save_trasaction",
+    base_url + "transaction/save_transaction",
     {
       id: t.dataset.id,
       status: "PENDING",
@@ -503,7 +502,7 @@ $(document).on("click", "#tblbody-regular tr.serve:first", function (e) {
 });
 
 $(document).on("click", "#tblbody-special tr.serve:first", function (e) {
-  btn_serve(this);
+  btn_serve(this);  
 });
 
 $(document).on("click", "#tblbody-regular1 tr.serve:first", function (e) {
@@ -544,7 +543,7 @@ function closeModal() {
 // Function for button action 1
 function action_done(_this) {
   postAjax(
-    base_url + "transaction/save_trasaction",
+    base_url + "transaction/save_transaction",
     {
       id: _this.closest(".modal").dataset.id,
       status: "DONE",
@@ -564,7 +563,7 @@ function action_verify(_this) {
   }
 
   postAjax(
-    base_url + "transaction/save_trasaction",
+    base_url + "transaction/save_transaction",
     {
       id: _this.closest(".modal").dataset.id,
       status: "VERIFY",
@@ -581,7 +580,7 @@ function action_verify(_this) {
 // Function for button action 2
 function action_proceed_to_payment(_this) {
   postAjax(
-    base_url + "transaction/save_trasaction",
+    base_url + "transaction/save_transaction",
     {
       id: _this.closest(".modal").dataset.id,
       status: "FINISHED",
